@@ -31,6 +31,7 @@ class Mouse {
 
   void advance(Cheese target) {
     // implement
+    // it should go to the closest active cheese.
   }
 
   void advance(Cheese[] targets) {
@@ -43,4 +44,10 @@ class Mouse {
     // i dont know what this is going to do. Draw a mouth perhaps.
     // this should call eat on the cheese object
   }
+
+  float distance(Cheese target) {
+    // implement
+    return 0;
+  }
+  
 }
