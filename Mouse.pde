@@ -2,7 +2,6 @@ class Mouse {
   int x;
   int y;
   float theta; // angle in radians.
-  boolean isFacingLeft; // this might be irrelevant, we will see. 
   int speed; 
   int eatingDistance = 60;
 
@@ -17,41 +16,41 @@ class Mouse {
     place(x, y);
   }
 
-  void place(int x, int y) { // effectively a setter
+  void place(int x, int y) {
     this.x = x;
     this.y = y;
   }
 
   void move(int plusX, int plusY) {
-    this.x = x+ plusX;
-    this.y = y+ plusY;
+    this.x += plusX;
+    this.y += plusY;
   }
 
   void render() {
-    // TODO: make a more detailed version 
-    // TODO: make a version that use theta
-    
     push();
     translate(x, y);
     rotate(theta);
-
+    
     stroke(50);
     strokeWeight(4);
-    line(0,0, -100,0);
+    line(0, 0, -100, 0);
     noStroke();
+    
     fill(#8B4513);
-    circle(0, 0, 60);
+    ellipse(0, 0, 100, 60);
+    
+    fill(#A0522D);
+    ellipse(-10, 0, 60, 35);
+    
+    fill(0);
+    circle(34, 10, 5);
+    circle(34, -10, 5);
 
     pop();
   }
 
-  void setAngle(float angle) { // rotates the mouse, but rotate is a keyword
+  void setAngle(float angle) {
     this.theta = angle;
-    if (this.theta > TAU/4 && this.theta < (3*TAU)/4) {
-      isFacingLeft = true;
-    } else {
-      isFacingLeft = false;
-    }
   }
 
   void advance(Cheese target) {
@@ -59,7 +58,8 @@ class Mouse {
       PVector path = new PVector(target.x-this.x, target.y-this.y);
       path.normalize();
       this.move(speed * round(path.x), speed * round(path.y));
-      this.setAngle(PVector.angleBetween(path, new PVector(1,0)));
+      this.setAngle(path.heading());
+      
     }
   }
 
@@ -92,8 +92,6 @@ class Mouse {
   }
 
   void eat(Cheese target) {
-    //I dont know what this is going to do. Draw a mouth perhaps.
-
     if (distance(target) <eatingDistance && target.isActive == true) {
       target.eat();
     }
