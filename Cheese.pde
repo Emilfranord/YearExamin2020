@@ -28,6 +28,7 @@ class Cheese {
     if (remaining <0) {
       remaining = slice;
       isActive = false;
+      gollom.findNextTarget(Cheeses);
     }
   }
 
