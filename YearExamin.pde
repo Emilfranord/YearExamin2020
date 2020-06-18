@@ -11,12 +11,19 @@ void setup() {
 void draw() {
   background(125);
   noStroke();
-  CheesesII.render();
+  frodo.render();
+  frodo.advance(Cheeses);
+
+  for(Cheese q:Cheeses ){
+    frodo.eat(q);
+    q.render();
+  }
+  
 }
 
 void mousePressed() {
-  CheesesII.place(mouseX,mouseY);
-  CheesesII.eat();
+  //CheesesII.place(mouseX,mouseY);
+  //CheesesII.eat();
   nextAvailableCheese(Cheeses).place(mouseX,mouseY);
 }
 
