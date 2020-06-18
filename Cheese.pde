@@ -4,11 +4,9 @@ class Cheese {
   boolean isActive; // also isActive. the chees is displayed and the mouse is en rute.
   int remaining; // the amount of cheese remainig int tau /8 
   
-  
   Cheese(){
-  // implement at random local
-    this.x = -1;
-    this.y = -1;
+    this.x = -10;
+    this.y = -10;
     this.isActive = false;
     remaining = 8;
   }
@@ -20,7 +18,7 @@ class Cheese {
   
   void render(){
     fill(#FFFF00);
-    arc(x, y, 40,40,0, (TAU /8 )*remaining, PIE );    
+    arc(x, y, 40,40,0, (TAU/8)*remaining, PIE );    
   }
   
   void eat(){
