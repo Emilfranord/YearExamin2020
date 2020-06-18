@@ -14,6 +14,7 @@ void setup() {
 void draw() {
   background(125);
   noStroke();
+  println(frodo.theta);
   
   frodo.render();
   frodo.advance(Cheeses);
