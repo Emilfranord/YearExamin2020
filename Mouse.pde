@@ -6,7 +6,6 @@ class Mouse {
   int speed; 
   int eatingDistance = 60;
 
-
   Mouse() {
     this.speed = 10;
     this.x = 500;
@@ -30,7 +29,7 @@ class Mouse {
 
   void render() {
     // TODO: make a more detailed version 
-    // TODO: make a vertion that use theta
+    // TODO: make a version that use theta
     fill(#8B4513);
     circle(x, y, 60);
   }
@@ -45,27 +44,39 @@ class Mouse {
   }
 
   void advance(Cheese target) {
-    if(target.isActive == true){
-    PVector path = new PVector(target.x-this.x, target.y-this.y);
-    path.normalize();
-    this.move(speed * round(path.x), speed * round(path.y));
+    if (target.isActive == true) {
+      PVector path = new PVector(target.x-this.x, target.y-this.y);
+      path.normalize();
+      this.move(speed * round(path.x), speed * round(path.y));
     }
   }
 
   void advance(Cheese[] targets) {
-    // this should call the single cheese variant
-    // it should go to the closest active cheese.
-    // implement
+    if (hasValidTarget(targets)) {
+      advance(targets[closestCheese(targets)]);
+    }
+  }
+
+  int closestCheese(Cheese[] targets) { // finds the closest and active cheeese. 
     float closestValue = 5000;
     int indexClosest = 99;
     for (int i = 0; i<targets.length; i++) {
-      if (distance(targets[i]) < closestValue) {
+      if (distance(targets[i]) < closestValue && targets[i].isActive == true) {
         closestValue = distance(targets[i]);
         indexClosest = i;
       }
     }
+    return indexClosest;
+  }
 
-    advance(targets[indexClosest]);
+  boolean hasValidTarget(Cheese[] targets) {
+    for (Cheese q : targets ) {
+      if (q.isActive == true) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   void eat(Cheese target) {
