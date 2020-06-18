@@ -1,4 +1,4 @@
-Cheese[] Cheeses = new Cheese[10]; // TODO: give array values in setup 
+Cheese[] Cheeses = new Cheese[16];
 Mouse frodo = new Mouse();
 
 
@@ -14,10 +14,10 @@ void setup() {
 void draw() {
   background(125);
   noStroke();
-  println(frodo.theta);
-  
+
   frodo.render();
   frodo.advance(Cheeses);
+
 
   for (Cheese q : Cheeses ) {
     frodo.eat(q);
@@ -34,6 +34,5 @@ Cheese nextAvailableCheese(Cheese[] targets) {
     if (q.isActive == false)
       return q;
   }
-
   return targets[0];
 }
