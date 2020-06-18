@@ -7,8 +7,8 @@ class Cheese {
 
   Cheese() {
     this.isActive = false;
-    slice = 16;
-    remaining = slice;
+    this.slice = 32;
+    this.remaining = slice;
   }
 
   Cheese(int x, int y) {
@@ -19,21 +19,17 @@ class Cheese {
   void render() {
     if (this.isActive == true) {
       fill(#FFFF00);
-      arc(x, y, 40, 40, 0, (TAU/slice)*remaining, PIE );
+      arc(x, y, 40, 40, 0, (TAU/slice)*remaining, PIE);
     }
   }
 
-  void eat() {
+  void eat(Mouse eater, Cheese[] targets) {
     remaining--;
     if (remaining <0) {
       remaining = slice;
       isActive = false;
-      gollom.findNextTarget(Cheeses);
+      eater.findNextTarget(targets);// this should only happen when the cheese is done beeing eaten.
     }
-  }
-
-  void eat(Mouse eater) {
-    this.eat();
   }
 
   void place(int x, int y) {
