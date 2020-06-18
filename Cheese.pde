@@ -1,29 +1,40 @@
 class Cheese {
   int x;
   int y;
-  boolean isActive; // also isActive 
+  boolean isActive; // also isActive. the chees is displayed and the mouse is en rute.
+  int remaining; // the amount of cheese remainig int tau /8 
+  
   
   Cheese(){
-  // implement at random local 
+  // implement at random local
+    this.x = -1;
+    this.y = -1;
+    this.isActive = false;
+    remaining = 8;
   }
   
   Cheese(int x, int y){
-    // implement at specific local
+    this();
+    place(x, y);
   }
   
   void render(){
-    // implement the drawing of the cheese, use a circle
+    fill(#FFFF00);
+    arc(x, y, 40,40,0, (TAU /8 )*remaining, PIE );    
   }
   
   void eat(){
-    // implement the eating of the cheese, have it take time, and reduce the angle of cheese. Use semi circle.
-    // make not active
+    remaining--;
+    if(remaining <0){
+      remaining = 8;
+      isActive = false;
+    } 
   }
   
-  void place(){
-  // implement place the cheese where the cursor is. 
-  // make this cheese active
+  void place(int x, int y){
+    this.x = x;
+    this.y = y;
+    isActive = true;
   }
-
-
+  
 }
