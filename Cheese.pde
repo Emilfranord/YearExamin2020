@@ -5,8 +5,6 @@ class Cheese {
   int remaining; // the amount of cheese remainig int tau /8 
   
   Cheese(){
-    this.x = -10;
-    this.y = -10;
     this.isActive = false;
     remaining = 8;
   }
@@ -17,8 +15,10 @@ class Cheese {
   }
   
   void render(){
+    if(this.isActive == true){
     fill(#FFFF00);
     arc(x, y, 40,40,0, (TAU/8)*remaining, PIE );    
+    }
   }
   
   void eat(){
@@ -32,7 +32,8 @@ class Cheese {
   void place(int x, int y){
     this.x = x;
     this.y = y;
-    isActive = true;
+    this.remaining = 8;
+    this.isActive = true;
   }
   
 }
