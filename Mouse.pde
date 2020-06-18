@@ -4,7 +4,7 @@ class Mouse {
   float theta; // angle in radians.
   int speed; 
   int eatingDistance;
-  int indexCheese =0;
+  int indexCheese = 0;
 
   Mouse(int x, int y, int speed) {
     place(x, y);
@@ -66,13 +66,6 @@ class Mouse {
     }
   }
 
-  void advance(Cheese[] targets) {
-    if (hasValidTarget(targets)) {
-      advance(targets[closestCheese(targets)]);
-      // finds the index of the closest cheese in the array. finds that object and passes it to advance single target.
-    }
-  }
-
   void toTarget(Cheese[] targets) {
     if (hasValidTarget(targets)) {
       advance(targets[indexCheese]);
@@ -80,11 +73,10 @@ class Mouse {
   }
 
   void findNextTarget(Cheese[] targets) {
-    if (hasValidTarget(targets)){
-    indexCheese = closestCheese(targets);
+    if (hasValidTarget(targets)) {
+      indexCheese = closestCheese(targets);
     }
   }
-
 
   boolean hasValidTarget(Cheese[] targets) {
     for (Cheese q : targets ) {
@@ -97,7 +89,7 @@ class Mouse {
 
   int closestCheese(Cheese[] targets) { // finds the closest and active cheeese. 
     float closestValue = 5000;  // just a big number
-    int indexClosest = targets.length+1;
+    int indexClosest = targets.length+1; // the intire array
 
     for (int i = 0; i<targets.length; i++) {
       if (distance(targets[i]) < closestValue && targets[i].isActive == true) {
@@ -108,9 +100,16 @@ class Mouse {
     return indexClosest;
   }
 
-  void eat(Cheese target) {
+
+  void eat(Cheese[] targets) {
+    for (Cheese q : targets) {
+      this.eat(q, targets);
+    }
+  }
+
+  void eat(Cheese target, Cheese[] targets) {
     if (distance(target) <eatingDistance && target.isActive == true) {
-      target.eat(this);
+      target.eat(this, targets);
     }
   }
 
