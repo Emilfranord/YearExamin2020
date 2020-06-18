@@ -4,6 +4,7 @@ class Mouse {
   float theta; // angle in radians.
   int speed; 
   int eatingDistance;
+  int indexCheese =0;
 
   Mouse(int x, int y, int speed) {
     place(x, y);
@@ -57,7 +58,7 @@ class Mouse {
   }
 
   void advance(Cheese target) {
-    if (target.isActive == true && distance(target) > 40) {
+    if (distance(target) > 40 && target.isActive == true) {
       PVector path = new PVector(target.x-this.x, target.y-this.y);
       path.normalize();
       this.move(speed * round(path.x), speed * round(path.y));
@@ -71,6 +72,19 @@ class Mouse {
       // finds the index of the closest cheese in the array. finds that object and passes it to advance single target.
     }
   }
+
+  void toTarget(Cheese[] targets) {
+    if (hasValidTarget(targets)) {
+      advance(targets[indexCheese]);
+    }
+  }
+
+  void findNextTarget(Cheese[] targets) {
+    if (hasValidTarget(targets)){
+    indexCheese = closestCheese(targets);
+    }
+  }
+
 
   boolean hasValidTarget(Cheese[] targets) {
     for (Cheese q : targets ) {
