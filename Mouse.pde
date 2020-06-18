@@ -5,21 +5,18 @@ class Mouse {
   int speed; 
   int eatingDistance;
 
-  Mouse() {
-    this.x = 500;
-    this.y = 500;
-    this.speed = 10;
-    this.eatingDistance= 50;
+  Mouse(int x, int y, int speed) {
+    place(x, y);
+    this.speed = speed;
+    this.eatingDistance = 50;
   }
 
   Mouse(int x, int y) {
-    this();
-    place(x, y);
+    this(x, y, 10);
   }
 
-  Mouse(int x, int y, int speed) {
-    this(x, y);
-    this.speed = speed;
+  Mouse() {
+    this(500, 500);
   }
 
   void place(int x, int y) {
@@ -71,7 +68,17 @@ class Mouse {
   void advance(Cheese[] targets) {
     if (hasValidTarget(targets)) {
       advance(targets[closestCheese(targets)]);
+      // finds the index of the closest cheese in the array. finds that object and passes it to advance single target.
     }
+  }
+
+  boolean hasValidTarget(Cheese[] targets) {
+    for (Cheese q : targets ) {
+      if (q.isActive == true) {
+        return true;
+      }
+    }
+    return false;
   }
 
   int closestCheese(Cheese[] targets) { // finds the closest and active cheeese. 
@@ -85,15 +92,6 @@ class Mouse {
       }
     }
     return indexClosest;
-  }
-
-  boolean hasValidTarget(Cheese[] targets) {
-    for (Cheese q : targets ) {
-      if (q.isActive == true) {
-        return true;
-      }
-    }
-    return false;
   }
 
   void eat(Cheese target) {
