@@ -3,10 +3,12 @@ class Cheese {
   int y;
   boolean isActive; // The cheese is displayed and the mouse can find it.
   int remaining; // the amount of cheese remaining
+  int slice;  
 
   Cheese() {
     this.isActive = false;
-    remaining = 8;
+    slice = 16;
+    remaining = slice;
   }
 
   Cheese(int x, int y) {
@@ -17,22 +19,26 @@ class Cheese {
   void render() {
     if (this.isActive == true) {
       fill(#FFFF00);
-      arc(x, y, 40, 40, 0, (TAU/8)*remaining, PIE );
+      arc(x, y, 40, 40, 0, (TAU/slice)*remaining, PIE );
     }
   }
 
   void eat() {
     remaining--;
     if (remaining <0) {
-      remaining = 8;
+      remaining = slice;
       isActive = false;
     }
+  }
+
+  void eat(Mouse eater) {
+    this.eat();
   }
 
   void place(int x, int y) {
     this.x = x;
     this.y = y;
-    this.remaining = 8;
+    this.remaining = slice;
     this.isActive = true;
   }
 }
