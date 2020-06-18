@@ -1,8 +1,8 @@
 class Mouse {
   int x;
   int y;
-  int theta; // angle in radians.
-  boolean isFacingLeft; 
+  float theta; // angle in radians.
+  boolean isFacingLeft; // this might be irrelevant, we will see. 
   int speed; 
   int eatingDistance = 60;
 
@@ -30,11 +30,22 @@ class Mouse {
   void render() {
     // TODO: make a more detailed version 
     // TODO: make a version that use theta
+    
+    push();
+    translate(x, y);
+    rotate(theta);
+
+    stroke(50);
+    strokeWeight(4);
+    line(0,0, -100,0);
+    noStroke();
     fill(#8B4513);
-    circle(x, y, 60);
+    circle(0, 0, 60);
+
+    pop();
   }
 
-  void setAngle(int angle) { // rotates the mouse, but rotate is a keyword
+  void setAngle(float angle) { // rotates the mouse, but rotate is a keyword
     this.theta = angle;
     if (this.theta > TAU/4 && this.theta < (3*TAU)/4) {
       isFacingLeft = true;
@@ -48,6 +59,7 @@ class Mouse {
       PVector path = new PVector(target.x-this.x, target.y-this.y);
       path.normalize();
       this.move(speed * round(path.x), speed * round(path.y));
+      this.setAngle(PVector.angleBetween(path, new PVector(1,0)));
     }
   }
 
