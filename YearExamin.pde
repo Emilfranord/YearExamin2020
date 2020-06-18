@@ -1,5 +1,6 @@
 Cheese[] Cheeses = new Cheese[16];
 Mouse frodo = new Mouse();
+Mouse gollom = new Mouse(1000,500);
 
 void setup() {
   fullScreen(1);
@@ -11,22 +12,26 @@ void setup() {
 }
 
 void draw() {
-  
   background(125);
   noStroke();
 
   for (Cheese q : Cheeses ) {
     frodo.eat(q);
+    gollom.eat(q);
     q.render();
   }
 
   frodo.render();
-  frodo.advance(Cheeses);
+  gollom.render();
+  //frodo.advance(Cheeses);
+  gollom.toTarget(Cheeses);
+  
 }
 
 void mousePressed() {
   if (hasAvailableCheese(Cheeses)) {
     nextAvailableCheese(Cheeses).place(mouseX, mouseY);
+    gollom.findNextTarget(Cheeses);
   }
 }
 
@@ -44,3 +49,6 @@ boolean hasAvailableCheese(Cheese[] targets) {
   }
   return false;
 }
+
+// TODO call closestCheese fewer times.
+// only call it when there is a reason for it.
