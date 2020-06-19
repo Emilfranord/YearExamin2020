@@ -61,7 +61,7 @@ class Mouse {
     if (distance(target) > 40 && target.isActive == true) {
       PVector path = new PVector(target.x-this.x, target.y-this.y);
       path.normalize();
-      this.move(speed * round(path.x), speed * round(path.y));
+      this.move(round(speed * path.x), round(speed * path.y));
       this.setAngle(path.heading());
     }
   }
@@ -99,7 +99,6 @@ class Mouse {
     }
     return indexClosest;
   }
-
 
   void eat(Cheese[] targets) {
     for (Cheese q : targets) {
