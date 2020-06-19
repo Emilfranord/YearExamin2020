@@ -28,7 +28,7 @@ class Cheese {
     if (remaining <0) {
       remaining = slice;
       isActive = false;
-      eater.findNextTarget(targets);// this should only happen when the cheese is done beeing eaten.
+      eater.findNextTarget(targets);// this should only happen when the cheese is done being eaten.
     }
   }
 

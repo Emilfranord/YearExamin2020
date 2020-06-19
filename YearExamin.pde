@@ -3,7 +3,7 @@ Mouse frodo = new Mouse();
 //Mouse gollum = new Mouse(1000, 500);
 
 void setup() {
-  fullScreen(1);
+  fullScreen(2);
   frameRate(15);
 
   for (int i = 0; i<Cheeses.length; i++) {
